@@ -15,13 +15,17 @@ angular.module("starter", [
     "ionic"
     "starter.controllers"
     "starter.services"
+    "ionic.utils"
   ])
-  .run(($ionicPlatform) ->
+  .run(($ionicPlatform, $http, $localstorage) ->
     $ionicPlatform.ready ->
       window.cordova?.plugins.Keyboard?.hideKeyboardAccessoryBar()
       window.StatusBar?.styleDefault()
+
+      auth = $localstorage.get("auth", "")
+      $http.defaults.headers.common["Authorization"] = "Bearer #{auth}"
   )
-  .config ($stateProvider, $urlRouterProvider) ->
+  .config ($stateProvider, $urlRouterProvider, $httpProvider, $localstorageProvider) ->
     $stateProvider.state("tab",
       url: "/tab"
       abstract: true
@@ -38,12 +42,12 @@ angular.module("starter", [
         "tab-friends":
           templateUrl: "templates/tab-friends.html"
           controller: "FriendsCtrl"
-    ).state("tab.friend-detail",
-      url: "/friend/:friendId"
+    ).state("tab.project",
+      url: "/project/:slug"
       views:
-        "tab-friends":
-          templateUrl: "templates/friend-detail.html"
-          controller: "FriendDetailCtrl"
+        "tab-project":
+          templateUrl: "templates/tab-project.html"
+          controller: "ProjectCtrl"
     ).state "tab.account",
       url: "/account"
       views:
@@ -52,5 +56,8 @@ angular.module("starter", [
           controller: "AccountCtrl"
 
     $urlRouterProvider.otherwise "/tab/dash"
+
+    $httpProvider.defaults.headers.common["Content-Type"] = "application/json"
+
 
   # if none of the above states are matched, use this as the fallback

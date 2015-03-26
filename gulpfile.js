@@ -14,7 +14,7 @@ var paths = {
 
 };
 
-gulp.task('default', ['sass']);
+gulp.task('default', ['sass', 'coffee']);
 
 gulp.task('sass', function(done) {
   gulp.src('./www/sass/**.scss')
@@ -30,10 +30,10 @@ gulp.task('coffee', function(done) {
   .pipe(coffee({bare: true}).on('error', gutil.log))
   .pipe(concat('application.js'))
   .pipe(gulp.dest('./www/js'))
-  .on('end', done)
+  .on('end', done);
 })
 
 gulp.task('watch', function() {
-  gulp.watch(paths.sass, ['sass'])
-  gulp.watch(paths.coffee, ['coffee'])
+  gulp.watch(paths.sass, ['sass']);
+  gulp.watch(paths.coffee, ['coffee']);
 });

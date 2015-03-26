@@ -1,0 +1,24 @@
+<ion-view title="{{project.name}}">
+  <ion-content has-header="true" padding="true">
+    <div class="row">
+        <div class="column" ng-repeat="status in project.us_statuses" style="width:700%">
+          <ion-list show-reorder="true">
+
+            <h2>{{status.name}}</h2>
+            <ion-item  ng-repeat="story in user_stories | filter: {status: status.id} | orderBy: 'order'">
+              <div class="item card">
+                <div class="item item-text-wrap">
+                  <h2>{{story.subject}}</h2>
+                  <p>{{story.description}}</p>
+                  {{story.kanban_order}}<br>{{story.status}}
+                </div>
+              </div>
+              <ion-reorder-button class="ion-navicon" on-reorder="reorderItem(story, $fromIndex, $toIndex)"></ion-reorder-button>
+
+            </ion-item>
+          </ion-list>
+        </div>
+
+    <div>
+  </ion-content>
+</ion-view>

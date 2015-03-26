@@ -1,5 +1,23 @@
 <ion-view title="Account">
   <ion-content class="has-header padding">
     <h1>Account</h1>
+
+    <div class="list" ng-hide="meta.logged_in">
+      <form ng-submit="submit()" ng-controller="AccountCtrl">
+      <label class="item item-input">
+        <input type="text" placeholder="User Name" ng-model="name">
+      </label>
+      <label class="item item-input">
+        <input type="password" ng-model="password" placeholder="Password">
+      </label>
+      <input type="submit" class="button button-block button-positive" value="Login">
+    </form>
+  </div>
+
+  <div ng-show="meta.logged_in">
+    <h2>{{meta.user.full_name_display}}</h2>
+    <button class="button button-block button-positive" ng-click="logout()" ng-controller="AccountCtrl">Logout</button>
+  </div>
+
   </ion-content>
 </ion-view>
