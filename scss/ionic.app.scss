@@ -18,6 +18,41 @@ $dark:                            #444 !default;
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
+$positive:                        #057b6c !default;
+$stable: #e8e8e8 !default;
+// $energized: #A00 !default;
+// $balanced: #000 !default;
+// $calm: #000 !default;
+// $assertive: #000 !default;
+// $royal: #000 !default;
+$dark: #1D1A1A  !default;
+
+$card-body-bg: #fff8e4 !default;
+
+//
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+.card > .item-content {
+  background-color: $card-body-bg;
+}
+
+.no-padding {
+    padding: 0px !important;
+}
+
+.kanban-col > div {
+  background-color: #f5f5f5;
+  margin-right: $item-border-width * 4;
+  margin-top: 5px;
+}
+
+.kanban-header {
+  background-color: #f5f5f5;
+}
+
+.kanban-status-color {
+  padding: $item-padding;
+  border: solid $dark $item-border-width;
+  margin-right: $item-padding;
+}
