@@ -1,6 +1,6 @@
 <ion-view title="{{project.name}}">
-  <ion-content has-header="true" padding="true">
-    <div class="row">
+  <ion-content has-header="true" padding="true" direction="xy" locking="true">
+    <!-- <div class="row">
         <div class="column" ng-repeat="status in project.us_statuses" style="width:700%">
           <ion-list show-reorder="true">
 
@@ -19,6 +19,49 @@
           </ion-list>
         </div>
 
-    <div>
+    <div> -->
+      <!-- <ion-scroll direction="xy" style="width:100%;height:100%" overflow-scroll="true" locking="true"> -->
+        <div class="row" style="width:{{75 * project.us_statuses.length}}%;">
+            <div class="col list" ng-repeat="status in project.us_statuses">
+              <div class="item item-stable item-divider row">
+                <div class="col">
+                  <em>{{status.name}}</em>
+                </div>
+                <div style="float:right">
+                  <button class="ion-navicon icon ion-plus button-clear"></button>
+                </div>
+              </div>
+
+              <ion-list show-reorder="true">
+
+                <ion-item class="no-padding card" ng-repeat="story in user_stories[status.id] | filter: {status: status.id} | orderBy: 'order'">
+                    <h2>{{story.subject}}</h2>
+                    <p>{{story.description}}</p>
+                    <!-- {{story.kanban_order}}<br>{{story.status}} -->
+                  <ion-reorder-button class="ion-navicon" on-reorder="reorderItem(story, $fromIndex, $toIndex)"></ion-reorder-button>
+                  <div class="clear">
+                    <button class="button button-calm button-outline" ng-click="editCategory(story)"><i class="icon ion-compose"></i></button>
+                    <button class="button button-assertive button-outline"><i class="icon ion-close"></i></button>
+                  </div>
+                </ion-item>
+
+              </ion-list>
+            </div>
+        </div>
+      <!-- </ion-scroll> -->
   </ion-content>
 </ion-view>
+
+<script id="categories.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar>
+      <h1 class="title">Select a category</h1>
+    </ion-header-bar>
+    <ion-content>
+      <button class="item button-full" ng-repeat="status in project.us_statuses" style="color:{{status.color}}" ng-click="setCategory(status)">
+        {{status.name}}
+      </button>
+      <button class="item button-full item-stable" ng-click="modal.hide()"><i class="icon ion-close"></i></button>
+    </ion-content>
+  </ion-modal-view>
+</script>
