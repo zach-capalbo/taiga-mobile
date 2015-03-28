@@ -1,6 +1,14 @@
 {
-  "name": "tinderClone",
-  "email": "",
+  "name": "taiga-mobile",
+  "email": "zach.geek@gmail.com",
   "app_id": "",
-  "package_name": ""
+  "package_name": "",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
 }
